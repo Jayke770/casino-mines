@@ -13,7 +13,7 @@ export default function Game() {
   const [gameData, setGameData] = useState<{ mines: number[], isGameOver?: boolean }>({ mines: generateMines() })
   const [clickBlocks, setClickBlocks] = useState<number[]>([])
   const onCheckBlock = (i: number) => {
-    if (!gameData?.isGameOver) {
+    if (!gameData?.isGameOver && !clickBlocks.includes(i)) {
       if (gameData?.mines.includes(i)) {
         tile.play()
         setGameData(e => ({ ...e, isGameOver: true }))
@@ -27,6 +27,7 @@ export default function Game() {
   const onRestart = () => {
     setClickBlocks([])
     setGameData(e => ({ ...e, mines: generateMines(), isGameOver: false }))
+    tile.play()
   }
   return (
     <>
