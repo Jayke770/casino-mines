@@ -25,7 +25,7 @@ export default function App() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="h-screen w-screen flex justify-center items-center p-5">
+      className="h-screen w-screen flex justify-center items-center p-4">
       <div className="w-full md:w-[30rem]  dark:bg-secondary-dark p-4 shadow-xl rounded-lg">
         <div className="flex justify-center gap-2 items-center py-2 text-4xl ">
           {emoji("💣")}
