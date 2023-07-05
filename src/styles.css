@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.block-active {
+    @apply h-16 shadow-md cursor-pointer rounded-md w-full dark:bg-blue-500 flex justify-center items-center p-2 outline-none ;
+}
