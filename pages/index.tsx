@@ -7,19 +7,19 @@ import Image from 'next/image'
 import BombLogo from "@/public/assets/images/bomb.png"
 import TileLogo from "@/public/assets/images/tile.png"
 import Head from 'next/head'
-const tile = new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7 })
-const bomb = new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7 })
+const tile = new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7 })
+const bomb = new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7 })
 export default function Game() {
   const [gameData, setGameData] = useState<{ mines: number[], isGameOver?: boolean }>({ mines: generateMines() })
   const [clickBlocks, setClickBlocks] = useState<number[]>([])
   const onCheckBlock = (i: number) => {
     if (!gameData?.isGameOver && !clickBlocks.includes(i)) {
       if (gameData?.mines.includes(i)) {
-        tile.play()
+        bomb.play()
         setGameData(e => ({ ...e, isGameOver: true }))
         setClickBlocks(e => ([...e, i]))
       } else {
-        bomb.play()
+        tile.play()
         setClickBlocks(e => ([...e, i]))
       }
     }
