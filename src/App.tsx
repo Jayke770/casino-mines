@@ -45,7 +45,7 @@ export default function App() {
                   initial={{ scale: 0.6 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0.6 }}
-                  transition={{ type: "spring", duration: 0.3 }}
+                  transition={{ type: "spring", bounce: 0.7, duration: 0.8 }}
                   src={gameData?.mines.includes(i) ? "/assets/images/bomb.png" : "/assets/images/star.png"}
                   loading="eager"
                   className="h-full w-full object-contain" />
