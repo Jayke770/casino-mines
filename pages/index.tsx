@@ -7,8 +7,8 @@ import Image from 'next/image'
 import BombLogo from "@/public/assets/images/bomb.png"
 import TileLogo from "@/public/assets/images/tile.png"
 import Head from 'next/head'
-const tile = new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7 })
-const bomb = new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7 })
+const tile = new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7 }).load()
+const bomb = new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7 }).load()
 export default function Game() {
   const [gameData, setGameData] = useState<{ mines: number[], isGameOver?: boolean }>({ mines: generateMines() })
   const [clickBlocks, setClickBlocks] = useState<number[]>([])
@@ -54,7 +54,7 @@ export default function Game() {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0.6 }}
                     transition={{ type: "spring", bounce: 0.7, duration: 0.8 }}
-                    className="p-2">
+                    className="p-0.5 md:p-2">
                     <Image
                       src={gameData?.mines.includes(i) ? BombLogo : TileLogo}
                       priority
