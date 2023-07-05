@@ -24,6 +24,10 @@ export default function Game() {
       }
     }
   }
+  const onRestart = () => {
+    setClickBlocks([])
+    setGameData(e => ({ ...e, mines: generateMines(), isGameOver: false }))
+  }
   return (
     <>
       <Head>
@@ -34,7 +38,7 @@ export default function Game() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="h-screen w-screen flex justify-center items-center p-4">
-        <div className="w-full md:w-[30rem]  dark:bg-secondary-dark p-4 shadow-xl rounded-lg">
+        <div className="w-full md:w-[30rem] dark:bg-secondary-dark p-4 shadow-xl rounded-lg">
           <div className="flex justify-center gap-2 items-center py-2 text-4xl ">
             {emoji("💣")}
             <h1 className="font-bold">Mines</h1>
@@ -64,6 +68,14 @@ export default function Game() {
                 ) : null}
               </motion.div>
             ))}
+          </div>
+          <div className='flex flex-col mt-5 px-4'>
+            <motion.button
+              onClick={onRestart}
+              disabled={!gameData?.isGameOver}
+              className="h-12 disabled:dark:bg-amber-600/10 disabled:cursor-not-allowed disabled:dark:text-zinc-500 w-full rounded-xl p-1 text-base font-semibold shadow transition-all dark:bg-amber-600 dark:focus:ring-2 dark:focus:ring-amber-600 dark:focus:ring-offset-1 dark:focus:ring-offset-secondary-dark">
+              Restart
+            </motion.button>
           </div>
         </div>
       </motion.main>
