@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tile-active {
+  @apply h-16 shadow-md cursor-pointer rounded-md w-full dark:bg-blue-500 flex justify-center items-center p-2 outline-none;
+}
+.tile-star {
+  @apply h-16 shadow-md cursor-pointer rounded-md w-full dark:bg-yellow-500/10 border-4 dark:border-yellow-500 flex justify-center items-center p-2 outline-none;
+}
+.tile-bomb {
+  @apply h-16 shadow-md cursor-pointer rounded-md w-full dark:bg-red-500/10 border-4 dark:border-red-500 flex justify-center items-center p-2 outline-none;
+}
