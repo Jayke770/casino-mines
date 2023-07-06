@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useCallback, useState, useMemo, Fragment } from 'react'
 import { motion } from "framer-motion"
 import emoji from "react-easy-emoji"
 import { generateMines } from "@/lib/config"
@@ -8,40 +8,39 @@ import BombLogo from "@/public/assets/images/bomb.png"
 import TileLogo from "@/public/assets/images/tile.png"
 import Head from 'next/head'
 import Background from '@/components/background-effect'
-const tile = new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7, preload: true })
-const bomb = new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7, preload: true })
 export default function Game() {
+  const tile = useMemo(() => new Howl({ src: ["/assets/sounds/tile.mp3"], volume: 0.7, preload: true }), []);
+  const bomb = useMemo(() => new Howl({ src: ["/assets/sounds/bomb.mp3"], volume: 0.7, preload: true }), []);
   const [gameData, setGameData] = useState<{ mines: number[], isGameOver?: boolean }>({ mines: generateMines() })
   const [clickBlocks, setClickBlocks] = useState<number[]>([])
-  const onCheckBlock = (i: number) => {
-    if (!gameData?.isGameOver && !clickBlocks.includes(i)) {
-      if (gameData?.mines.includes(i)) {
-        bomb.play()
-        setGameData(e => ({ ...e, isGameOver: true }))
-        setClickBlocks(e => ([...e, i]))
+  const onCheckBlock = useCallback((i: number) => {
+    if (!gameData.isGameOver && !clickBlocks.includes(i)) {
+      if (gameData.mines.includes(i)) {
+        bomb.play();
+        setGameData((e) => ({ ...e, isGameOver: true }));
+        setClickBlocks((e) => [...e, i]);
       } else {
-        tile.play()
-        setClickBlocks(e => ([...e, i]))
+        tile.play();
+        setClickBlocks((e) => [...e, i]);
       }
     }
-  }
-  const onRestart = () => {
+  }, [gameData, clickBlocks])
+  const onRestart = useCallback(() => {
     setClickBlocks([])
-    setGameData(e => ({ ...e, mines: generateMines(), isGameOver: false }))
+    setGameData((e) => ({ mines: generateMines(), isGameOver: false }))
     tile.play()
-  }
+  }, [setClickBlocks, setGameData])
   return (
-    <>
+    <Fragment>
       <Head>
         <title>Mines</title>
       </Head>
-
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="h-screen w-screen flex justify-center items-center p-4 relative overflow-hidden">
-        <Background />
+        <Background key="bgn" />
         <div className='absolute w-full h-full flex justify-center items-center p-4'>
           <div className="w-full md:w-[30rem] dark:bg-secondary-dark translucent shadow-xl p-4 rounded-lg">
             <div className="flex justify-center gap-2 items-center py-2 text-4xl ">
@@ -85,6 +84,6 @@ export default function Game() {
           </div>
         </div>
       </motion.main >
-    </>
+    </Fragment>
   )
 }

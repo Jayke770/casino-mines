@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
+import { useMemo, memo } from 'react'
 import Image from 'next/image'
 import BombLogo from "@/public/assets/images/bomb.png"
 import TileLogo from "@/public/assets/images/tile.png"
 const icons = [BombLogo, TileLogo]
-const particles = Array(Math.floor((Math.random() * 50)) + 20).fill(0)
-export default function Background() {
+const Background = memo(() => {
     return (
         <>
-            {particles.map((_, i) => (
+            {Array(50).fill(0).map((_, i) => (
                 <motion.div
                     key={i}
                     className='absolute'
@@ -34,8 +34,8 @@ export default function Background() {
                         alt="icon"
                         className='h-12 w-12 object-contain' />
                 </motion.div >
-            ))
-            }
+            ))}
         </>
     )
-}
+})
+export default Background
