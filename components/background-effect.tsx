@@ -38,4 +38,5 @@ const Background = memo(() => {
         </>
     )
 })
+Background.displayName = "background"
 export default Background

@@ -24,12 +24,12 @@ export default function Game() {
         setClickBlocks((e) => [...e, i])
       }
     }
-  }, [gameData, clickBlocks])
+  }, [bomb, clickBlocks, gameData.isGameOver, gameData.mines, tile])
   const onRestart = useCallback(() => {
     setClickBlocks([])
     setGameData((e) => ({ mines: generateMines(), isGameOver: false }))
     tile.play()
-  }, [setClickBlocks, setGameData])
+  }, [tile])
   return (
     <Fragment>
       <Head>
