@@ -15,12 +15,12 @@ export default function Game() {
   const [clickBlocks, setClickBlocks] = useState<number[]>([])
   const onCheckBlock = useCallback((i: number) => {
     if (!gameData.isGameOver && !clickBlocks.includes(i)) {
+      tile.play()
       if (gameData.mines.includes(i)) {
         bomb.play()
         setGameData((e) => ({ ...e, isGameOver: true }))
         setClickBlocks((e) => [...e, i])
       } else {
-        tile.play()
         setClickBlocks((e) => [...e, i])
       }
     }
