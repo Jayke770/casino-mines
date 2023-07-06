@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+ @supports (backdrop-filter: blur(20px)) {
+   .translucent {
+     --tw-bg-opacity: 0.8 !important;
+     backdrop-filter: saturate(180%) blur(20px);
+   }
+ }
 .tile-active {
   @apply h-16 shadow-md cursor-pointer rounded-md w-full dark:bg-blue-500 flex justify-center items-center p-2 outline-none;
 }
